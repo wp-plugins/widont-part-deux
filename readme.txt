@@ -3,7 +3,7 @@ Contributors: morganestes
 Donate link: http://www.morganestes.me/donate
 Tags: typography, widows, orphans, title
 Requires at least: 3.5
-Tested up to: 3.9
+Tested up to: 4.0
 Stable tag: 1.3.1
 License: GPLv3
 
