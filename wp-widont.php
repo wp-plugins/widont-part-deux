@@ -1,4 +1,5 @@
 <?php
+
 /*
 Plugin Name: Widon’t Part Deux
 Plugin URI: https://github.com/morganestes/wp-widont
@@ -22,7 +23,7 @@ class WidontPartDeux {
 	 * The normalized path to the plugin file. Set in the constructor.
 	 */
 	protected $plugin = '';
-	protected $plugin_name = 'Widon&#8217;t Part Deux';
+	protected $plugin_name = "Widon't Part Deux";
 	protected $plugin_shortname = 'widont_deux';
 	/**#@-*/
 
@@ -65,7 +66,7 @@ class WidontPartDeux {
 	 * @uses get_option()
 	 * @return array|string An array of settings unserialized; empty string if not found.
 	 */
-	public function get_options(){
+	public function get_options() {
 		return get_option( $this->plugin_shortname, '' );
 	}
 
@@ -73,6 +74,7 @@ class WidontPartDeux {
 	 * Cheater method to update the options in the database.
 	 *
 	 * @uses update_option()
+	 *
 	 * @param  array $options The full options field data to set.
 	 *
 	 * @return bool
@@ -89,7 +91,8 @@ class WidontPartDeux {
 	 * @return array
 	 */
 	public function add_settings_link( $links ) {
-		$settings_link = '<a href="' . esc_url( "options-general.php?page={$this->plugin}" ) . '">Settings</a>';
+		$settings_link = '<a href="' . esc_url( "options-general.php?page={$this->plugin}" ) . '">' . esc_attr_e( 'Settings',
+				'widont' ) . '</a>';
 		array_unshift( $links, $settings_link );
 
 		return $links;
@@ -97,14 +100,15 @@ class WidontPartDeux {
 
 	/**
 	 * Check the version of installed plugin and update the options field.
+	 *
 	 * @return bool If the update was successful.
 	 */
 	protected function version_check() {
 		// @todo Implement logic if we need to do anything if they're different.
 		// For now, just store the current version.
-		$options = $this->get_options();
+		$options            = $this->get_options();
 		$options['version'] = $this->version;
-		$updated = $this->update_options( $options );
+		$updated            = $this->update_options( $options );
 
 		return $updated;
 	}
@@ -113,6 +117,7 @@ class WidontPartDeux {
 	 * Parse the string and add a non-breaking space.
 	 *
 	 * @param $str string
+	 *
 	 * @return string
 	 */
 	public function widont( $str = '' ) {
@@ -121,7 +126,7 @@ class WidontPartDeux {
 
 	public function filter_content( $content = '' ) {
 		$options = $this->get_options();
-		$tags = $options['tags'];
+		$tags    = $options['tags'];
 
 		if ( ! empty( $tags ) && preg_match_all( '#<(' . $tags . ')>(.+)</\1>#', $content, $matches ) ) {
 			foreach ( $matches[0] as $match ) {
@@ -130,12 +135,12 @@ class WidontPartDeux {
 				}
 			}
 		}
+
 		return $content;
 	}
 
 	/**
 	 * Check if the string is safe to filter.
-
 	 * If an oEmbed (or any iframe, really) is used an iframe tag is generated.
 	 * We need to take care to not look inside this, or any other specified tag, so we don't
 	 * accidentally add in a break inside the tag itself (all spaces should be added to the text
@@ -147,7 +152,7 @@ class WidontPartDeux {
 	 */
 	public function safe_to_filter( $string ) {
 		$unsafe_tags = array( 'iframe', 'script', 'style', 'embed', 'object', 'video', 'audio' );
-		$is_safe   = true;
+		$is_safe     = true;
 
 		foreach ( $unsafe_tags as $tag ) {
 			if ( preg_match( "#<$tag#", $string ) ) {
@@ -160,7 +165,8 @@ class WidontPartDeux {
 
 	public function plugin_preferences_menu() {
 		if ( function_exists( 'add_submenu_page' ) ) {
-			add_submenu_page( 'options-general.php', __( $this->plugin_name , 'widont'), __( $this->plugin_name , 'widont'), 'manage_options', $this->plugin , array( $this, 'options_page' ) );
+			add_submenu_page( 'options-general.php', __( $this->plugin_name, 'widont' ),
+				__( $this->plugin_name, 'widont' ), 'manage_options', $this->plugin, array( $this, 'options_page' ) );
 		}
 	}
 
@@ -196,9 +202,9 @@ class WidontPartDeux {
 	function add_starting_tags( $tags = '' ) {
 		$options = $this->get_options();
 
-		if ( !isset( $options['tags'] ) || null == $options['tags'] ) {
+		if ( ! isset( $options['tags'] ) || null == $options['tags'] ) {
 			$options['tags'] = $tags;
-			$filtered_tags = $this->widont_validate_tags_input( $options );
+			$filtered_tags   = $this->widont_validate_tags_input( $options );
 			$this->update_options( $filtered_tags );
 		}
 	}
@@ -218,6 +224,7 @@ HTML;
 
 	/**
 	 * Displays the input field in the options form.
+	 *
 	 * @return string
 	 */
 	function html_input_tags() {
@@ -228,8 +235,8 @@ HTML;
 			$extended_tags = str_replace( '|', ' ', $options['tags'] );
 		}
 
-		$tags = esc_attr( $extended_tags );
-		$name = esc_attr( "$this->plugin_shortname[tags]" );
+		$tags        = esc_attr( $extended_tags );
+		$name        = esc_attr( "$this->plugin_shortname[tags]" );
 		$description = __( '*Elements not allowed in posts will be automatically stripped.', 'widont' );
 
 		$input = <<<HTML
@@ -237,7 +244,7 @@ HTML;
 		<span class="description">$description</span>
 HTML;
 
-		_e( $input , 'widont');
+		_e( $input, 'widont' );
 	}
 
 	/**
@@ -248,14 +255,16 @@ HTML;
 	 * @return array The sanitized options to add to the database.
 	 */
 	function widont_validate_tags_input( $input ) {
-		if ( empty( $input ) ) return;
+		if ( empty( $input ) ) {
+			return array();
+		}
 
 		/**#@+
 		 * @var array
 		 */
-		$elements = array();
+		$elements  = array();
 		$elements2 = array();
-		$newinput = array();
+		$newinput  = array();
 
 		/**#@+
 		 * @var string
@@ -270,7 +279,7 @@ HTML;
 		$newinput['tags'] = preg_replace( '/[,;<>|\/\s]+/', ' ', trim( $input['tags'] ) );
 
 		// Make a couple of arrays to use to filter through.
-		$elements = explode( ' ', $newinput['tags'] );
+		$elements  = explode( ' ', $newinput['tags'] );
 		$elements2 = array();
 
 		/** Loop through the tags and make 'em look like actual tags so wp_kses_post will handle them properly. */
@@ -293,21 +302,25 @@ HTML;
 	 * The Settings page displayed.
 	 */
 	function options_page() {
-		echo '<div class="wrap">';
-
-		/* screen_icon was deprecated in 3.8 */
-		if ( version_compare( $GLOBALS['wp_version'], '3.8', '<' ) ) {
-			screen_icon();
-		}
-
-		_e( sprintf( '<h2>%s Options</h2>', $this->plugin_name ), 'widont' );
-		echo '<form method="post" action="options.php">';
-
-		settings_fields( $this->plugin_shortname );
-		do_settings_sections( $this->plugin );
-		submit_button( __( 'Update Preferences', 'widont' ) );
-
-		echo '</form></div>';
+		?>
+		<div class="wrap">
+			<?php
+			/* screen_icon was deprecated in 3.8 */
+			if ( version_compare( $GLOBALS['wp_version'], '3.8', '<' ) ) {
+				screen_icon();
+			}
+			?>
+			<h2><?php _e( sprintf( '%s Options', $this->plugin_name ), 'widont' ); ?></h2>
+			
+			<form method="post" action="<?php echo esc_url( get_admin_url( null, 'options.php' ) ); ?>">
+				<?php
+				settings_fields( $this->plugin_shortname );
+				do_settings_sections( $this->plugin );
+				submit_button( __( 'Update Preferences', 'widont' ) );
+				?>
+			</form>
+		</div>
+	<?php
 	}
 
 }
