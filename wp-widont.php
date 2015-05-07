@@ -226,7 +226,7 @@ class WidontPartDeux {
 		<p>With Widon’t your post titles are spared unwanted widows. Extend that courtesy to other tags in your posts* by entering tag names below.</p>
 		<p>No need to include angle brackets. Separate multiple tag names with a space or comma (e.g. <code>h3 h4 h5</code> or <code>p, li, span</code>).</p>
 HTML;
-		_e( $text, 'widont' );
+		esc_html_e( $text, 'widont' );
 	}
 
 	/**
@@ -246,12 +246,10 @@ HTML;
 		$name        = esc_attr( "$this->plugin_shortname[tags]" );
 		$description = __( '*Elements not allowed in posts will be automatically stripped.', 'widont' );
 
-		$input = <<<HTML
-		<input type="text" name="$name" id="extended_tags" class="regular-text code" value="$tags" />
-		<span class="description">$description</span>
-HTML;
-
-		_e( $input, 'widont' );
+		?>
+		<input type="text" name="<?php esc_attr_e( $name, 'widont' ); ?>" id="extended_tags" class="regular-text code" value="<?php esc_attr_e( $tags, 'widont' ); ?>" />
+		<span class="description"><?php esc_html_e( $description, 'widont' ); ?></span>
+	<?php
 	}
 
 	/**
