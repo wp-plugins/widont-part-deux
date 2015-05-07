@@ -265,13 +265,6 @@ HTML;
 		}
 
 		/**#@+
-		 * @var array
-		 */
-		$elements  = array();
-		$elements2 = array();
-		$new_input  = array();
-
-		/**#@+
 		 * @var string
 		 */
 		$new_input['tags'] = '';
