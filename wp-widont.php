@@ -3,13 +3,11 @@
 Plugin Name: Widon’t Part Deux
 Plugin URI: https://github.com/morganestes/wp-widont
 Description: Building on <a href="http://www.shauninman.com/archive/2008/08/25/widont_2_1_1" target="_blank">Shaun Inman’s plugin</a>, Widon’t Part Deux eliminates <a href="http://en.wikipedia.org/wiki/Widow_(typesetting)" target="_blank">widows</a> in the titles and content your posts and pages.
-<<<<<<< HEAD
-Version: 1.3.1
-=======
-Version: 1.3.0
->>>>>>> eced214c0d53aeed0121b6f4ba79830968bba943
+Version: 1.3.2
+Text Domain: widont
+Domain Path: /lang
 Author: Morgan Estes
-Author URI: http://www.morganestes.me/
+Author URI: http://www.morganestes.com/
 License: GPLv3
 */
 
@@ -18,7 +16,7 @@ class WidontPartDeux {
 	/**#@+
 	 * @var string
 	 */
-	protected $version = '1.3.1';
+	protected $version = '1.3.2';
 
 	/**
 	 * The normalized path to the plugin file. Set in the constructor.
@@ -162,7 +160,7 @@ class WidontPartDeux {
 
 	public function plugin_preferences_menu() {
 		if ( function_exists( 'add_submenu_page' ) ) {
-			add_submenu_page( 'options-general.php', __( $this->plugin_name ), __( $this->plugin_name ), 'manage_options', $this->plugin , array( $this, 'options_page' ) );
+			add_submenu_page( 'options-general.php', __( $this->plugin_name , 'widont'), __( $this->plugin_name , 'widont'), 'manage_options', $this->plugin , array( $this, 'options_page' ) );
 		}
 	}
 
@@ -239,7 +237,7 @@ HTML;
 		<span class="description">$description</span>
 HTML;
 
-		_e( $input );
+		_e( $input , 'widont');
 	}
 
 	/**

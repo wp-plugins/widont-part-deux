@@ -1,33 +1,53 @@
+# Copyright (C) 2015 Widon’t Part Deux
+# This file is distributed under the same license as the Widon’t Part Deux package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Widon't Part Deux\n"
-"POT-Creation-Date: 2014-01-03 14:53-0600\n"
-"PO-Revision-Date: 2014-01-03 14:53-0600\n"
-"Last-Translator: Morgan Estes <morgan@golftailor.com>\n"
-"Language-Team: Morgan Estes <morgan.estes@gmail.com>\n"
-"Language: en_US\n"
+"Project-Id-Version: Widon’t Part Deux 1.3.1\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/widont-part-deux\n"
+"POT-Creation-Date: 2015-05-07 18:19:13+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.6.3\n"
-"X-Poedit-Basepath: ..\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e\n"
-"X-Poedit-SearchPath-0: .\n"
+"PO-Revision-Date: 2015-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: wp-widont.php:140
+#: wp-widont.php:172
 msgid "Post/Page Content Tags"
 msgstr ""
 
-#: wp-widont.php:146
+#: wp-widont.php:178
 msgid "Tags to filter in the post content*: "
 msgstr ""
 
-#: wp-widont.php:203
+#: wp-widont.php:235
 msgid "*Elements not allowed in posts will be automatically stripped."
 msgstr ""
 
-#: wp-widont.php:281
+#: wp-widont.php:310
 msgid "Update Preferences"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Widon’t Part Deux"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://github.com/morganestes/wp-widont"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Building on <a href=\"http://www.shauninman.com/archive/2008/08/25/"
+"widont_2_1_1\" target=\"_blank\">Shaun Inman’s plugin</a>, Widon’t Part Deux "
+"eliminates <a href=\"http://en.wikipedia.org/wiki/Widow_(typesetting)\" "
+"target=\"_blank\">widows</a> in the titles and content your posts and pages."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Morgan Estes"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://www.morganestes.me/"
 msgstr ""
