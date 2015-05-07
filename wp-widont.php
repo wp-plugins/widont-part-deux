@@ -310,7 +310,7 @@ HTML;
 				screen_icon();
 			}
 			?>
-			<h2><?php _e( sprintf( '%s Options', $this->plugin_name ), 'widont' ); ?></h2>
+			<h2><?php printf( __( '%s Options', 'widont' ), $this->plugin_name ); ?></h2>
 			
 			<form method="post" action="<?php echo esc_url( get_admin_url( null, 'options.php' ) ); ?>">
 				<?php
