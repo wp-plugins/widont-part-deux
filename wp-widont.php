@@ -166,8 +166,14 @@ class WidontPartDeux {
 
 	public function plugin_preferences_menu() {
 		if ( function_exists( 'add_submenu_page' ) ) {
-			add_submenu_page( 'options-general.php', __( $this->plugin_name, 'widont' ),
-				__( $this->plugin_name, 'widont' ), 'manage_options', $this->plugin, array( $this, 'options_page' ) );
+			add_submenu_page(
+				'options-general.php',
+				__( sanitize_title( $this->plugin_name ), 'widont' ),
+				__( sanitize_title( $this->plugin_name ), 'widont' ),
+				'manage_options',
+				$this->plugin,
+				array( $this, 'options_page' )
+			);
 		}
 	}
 
