@@ -33,7 +33,7 @@ class WidontPartDeux {
 	public function __construct() {
 		$this->plugin = plugin_basename( __FILE__ );
 
-		if ( false == get_option( $this->plugin_shortname ) ) {
+		if ( false === get_option( $this->plugin_shortname ) ) {
 			add_option( $this->plugin_shortname );
 		}
 
@@ -91,8 +91,9 @@ class WidontPartDeux {
 	 * @return array
 	 */
 	public function add_settings_link( $links ) {
-		$settings_link = '<a href="' . esc_url( "options-general.php?page={$this->plugin}" ) . '">' . esc_attr_e( 'Settings',
-				'widont' ) . '</a>';
+		$options_url = get_admin_url( null, 'options-general.php' );
+		$options_url = add_query_arg( array( 'page' => $this->plugin ), $options_url );
+		$settings_link = esc_html( '<a href="' . esc_url( $options_url ) . '">' . esc_attr_e( 'Settings', 'widont' ) . '</a>' );
 		array_unshift( $links, $settings_link );
 
 		return $links;
