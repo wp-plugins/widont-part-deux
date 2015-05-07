@@ -264,22 +264,22 @@ HTML;
 		 */
 		$elements  = array();
 		$elements2 = array();
-		$newinput  = array();
+		$new_input  = array();
 
 		/**#@+
 		 * @var string
 		 */
-		$newinput['tags'] = '';
+		$new_input['tags'] = '';
 		/**
 		 * The tags that are allowed inside posts as filtered by WP.
 		 */
 		$filtered_elements = '';
 
 		// Strip out anything extra that may cause problems.
-		$newinput['tags'] = preg_replace( '/[,;<>|\/\s]+/', ' ', trim( $input['tags'] ) );
+		$new_input['tags'] = preg_replace( '/[,;<>|\/\s]+/', ' ', trim( $input['tags'] ) );
 
 		// Make a couple of arrays to use to filter through.
-		$elements  = explode( ' ', $newinput['tags'] );
+		$elements  = explode( ' ', $new_input['tags'] );
 		$elements2 = array();
 
 		/** Loop through the tags and make 'em look like actual tags so wp_kses_post will handle them properly. */
@@ -292,10 +292,10 @@ HTML;
 
 		$filtered_elements = wp_kses_post( implode( $elements2 ) );
 
-		$newinput['tags'] = preg_replace( '/[\s<>]+/', '|', $filtered_elements );
-		$newinput['tags'] = trim( $newinput['tags'], '|' );
+		$new_input['tags'] = preg_replace( '/[\s<>]+/', '|', $filtered_elements );
+		$new_input['tags'] = trim( $new_input['tags'], '|' );
 
-		return $newinput;
+		return $new_input;
 	}
 
 	/**
