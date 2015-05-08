@@ -273,10 +273,10 @@ HTML;
 		$elements  = explode( ' ', $new_input['tags'] );
 		$elements2 = array();
 
-		/** Loop through the tags and make 'em look like actual tags so wp_kses_post will handle them properly. */
+		/* Loop through the tags and make 'em look like actual tags so wp_kses_post will handle them properly. */
 		foreach ( $elements as $element ) {
 			$element = preg_replace( '/[<>]/', '', $element );
-			array_push( $elements2, "<$element>" );
+			$elements2[] = "<$element>";
 		}
 
 		$elements2 = array_unique( $elements2 );
