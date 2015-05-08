@@ -91,9 +91,10 @@ class WidontPartDeux {
 	 * @return array
 	 */
 	public function add_settings_link( $links ) {
-		$options_url = get_admin_url( null, 'options-general.php' );
-		$options_url = add_query_arg( array( 'page' => $this->plugin ), $options_url );
-		$settings_link = esc_html( '<a href="' . esc_url( $options_url ) . '">' . esc_attr_e( 'Settings', 'widont' ) . '</a>' );
+		$options_url   = get_admin_url( null, 'options-general.php' );
+		$options_url   = add_query_arg( array( 'page' => $this->plugin ), $options_url );
+		$settings_link = esc_html( '<a href="' . esc_url( $options_url ) . '">' . esc_attr_e( 'Settings',
+				'widont' ) . '</a>' );
 		array_unshift( $links, $settings_link );
 
 		return $links;
@@ -247,7 +248,8 @@ HTML;
 		$description = __( '*Elements not allowed in posts will be automatically stripped.', 'widont' );
 
 		?>
-		<input type="text" name="<?php esc_attr_e( $name, 'widont' ); ?>" id="extended_tags" class="regular-text code" value="<?php esc_attr_e( $tags, 'widont' ); ?>" />
+		<input type="text" name="<?php esc_attr_e( $name, 'widont' ); ?>" id="extended_tags" class="regular-text code"
+		       value="<?php esc_attr_e( $tags, 'widont' ); ?>"/>
 		<span class="description"><?php esc_html_e( $description, 'widont' ); ?></span>
 	<?php
 	}
@@ -264,15 +266,6 @@ HTML;
 			return array();
 		}
 
-		/**#@+
-		 * @var string
-		 */
-		$new_input['tags'] = '';
-		/**
-		 * The tags that are allowed inside posts as filtered by WP.
-		 */
-		$filtered_elements = '';
-
 		// Strip out anything extra that may cause problems.
 		$new_input['tags'] = preg_replace( '/[,;<>|\/\s]+/', ' ', trim( $input['tags'] ) );
 
@@ -288,6 +281,10 @@ HTML;
 
 		$elements2 = array_unique( $elements2 );
 
+		/**
+		 * The tags that are allowed inside posts as filtered by WP.
+		 * @var string
+		 */
 		$filtered_elements = wp_kses_post( implode( $elements2 ) );
 
 		$new_input['tags'] = preg_replace( '/[\s<>]+/', '|', $filtered_elements );
@@ -309,7 +306,7 @@ HTML;
 			}
 			?>
 			<h2><?php printf( __( '%s Options', 'widont' ), $this->plugin_name ); ?></h2>
-			
+
 			<form method="post" action="<?php echo esc_url( get_admin_url( null, 'options.php' ) ); ?>">
 				<?php
 				settings_fields( $this->plugin_shortname );
